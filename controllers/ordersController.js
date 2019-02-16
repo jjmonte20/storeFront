@@ -5,7 +5,7 @@ module.exports = {
     // finding all of the orders for a particular user
     findAll: function(req, res){
         db.User
-            .find({ _id: req.user._id})
+            .find({ _id: req.user._id })
             .populate("orders")
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
