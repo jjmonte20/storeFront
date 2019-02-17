@@ -1,20 +1,56 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
-  getBooks: function() {
-    return axios.get("/api/books");
+  // Creates a user
+  createUser: function(userData) {
+    return axios.post("/api/users", userData);
   },
-  // Gets the book with the given id
-  getBook: function(id) {
-    return axios.get("/api/books/" + id);
+  // Deletes a user
+  deleteUser: function(id){
+    return axios.delete("/api/users/" + id);
   },
-  // Deletes the book with the given id
-  deleteBook: function(id) {
-    return axios.delete("/api/books/" + id);
+  // ============================
+  // Creates an order
+  createOrder: function(id, orderData){
+    return axios.post("/api/orders/" + id,orderData);
   },
-  // Saves a book to the database
-  saveBook: function(bookData) {
-    return axios.post("/api/books", bookData);
+  // Finds all orders for one user
+  findAllOrders: function(id, orderData){
+    return axios.get("/api/orders/user/" + id, orderData);
+  },
+  // Finds all data for one order
+  findOneOrder: function(id, orderData){
+    return axios.get("/api/orders/" + id, orderData);
+  },
+  // Deletes an order
+  deleteOrder: function(id){
+    return axios.delete("/api/orders/" + id);
+  },
+  // ============================
+  // Creates an item in the order
+  createItem: function(id, itemData){
+    return axios.post("/api/items/" + id, itemData);
+  },
+  // Deletes an item
+  deleteItem: function(id){
+    return axios.delete("/api/items/" + id);
+  },
+  // ============================
+  // finds all of the available items
+  findAvailableItems: function(available){
+    return axios.get("/api/availableitems", available);
+  },
+  // adds an item to the available item database
+  addNewAvailable: function(available){
+    return axios.post("/api/availableitems", available);
+  },
+  // ============================
+  // login data
+  login: function(loginUser){
+    return axios.post("/api/login", loginUser);
+  },
+  // logout
+  logout: function(){
+    return axios.get("/api/logout");
   }
 };

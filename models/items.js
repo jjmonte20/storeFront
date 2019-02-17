@@ -20,5 +20,5 @@ var ItemSchema = new Schema({
 // This creates our model from the above schema, using mongoose's model method
 var Items = mongoose.model("Items", ItemSchema);
 
-// Export the Note model
+// Export the item model
 module.exports = Items;
