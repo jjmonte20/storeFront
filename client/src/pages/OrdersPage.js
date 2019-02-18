@@ -26,10 +26,8 @@ class Orders extends Component {
     loadOrders = () => {
         API.findAllOrders(this.state.user._id).then(res => {
             this.setState({ orderHolder: res.data });
-            console.log(res.data);
             if (res.data.orders !== null){
                 this.setState({ orders: res.data.orders });
-                console.log(this.state.orders);
             }
         })
     }
@@ -59,7 +57,7 @@ class Orders extends Component {
                             <div>
                                 {this.state.orders.map(order => (
                                     <div className="card" key={order._id}>
-                                        <h1>{order._id}</h1>
+                                        <Link to={"/shop/" + order._id}><h1>{order._id}</h1></Link>
                                     </div>
                                 ))}
                             </div>

@@ -9,7 +9,7 @@ var OrderSchema = new Schema({
     // `title` must be of type String
     items:{
       type: Schema.Types.ObjectId,
-      ref: "Items"
+      ref: "Item"
     }
   });
   

@@ -18,7 +18,7 @@ var ItemSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-var Items = mongoose.model("Items", ItemSchema);
+var Item = mongoose.model("Item", ItemSchema);
 
 // Export the item model
-module.exports = Items;
+module.exports = Item;
