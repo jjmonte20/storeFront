@@ -5,14 +5,18 @@ export default {
   createUser: function(userData) {
     return axios.post("/api/users", userData);
   },
+  // For checking auth
+  findMe: function(){
+    return axios.get("/api/users/me");
+  },
   // Deletes a user
   deleteUser: function(id){
     return axios.delete("/api/users/" + id);
   },
   // ============================
   // Creates an order
-  createOrder: function(id, orderData){
-    return axios.post("/api/orders/" + id,orderData);
+  createOrder: function(id){
+    return axios.post("/api/orders/" + id);
   },
   // Finds all orders for one user
   findAllOrders: function(id, orderData){
