@@ -36,6 +36,9 @@ class Orders extends Component {
 
     handleAddOrder = () => {
         API.createOrder(this.state.user._id)
+        .then(res => {
+            this.loadOrders();
+        })
     }
 
     render(){
@@ -61,7 +64,7 @@ class Orders extends Component {
                                 ))}
                             </div>
                         ) : (
-                            <h3>No orders to display</h3>
+                            <button type="button" onClick={this.handleAddOrder}>Add an order</button>
                         )}
                     </Col>
                 </Row>

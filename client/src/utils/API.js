@@ -16,6 +16,7 @@ export default {
   // ============================
   // Creates an order
   createOrder: function(id){
+    console.log("/api/orders/" + id);
     return axios.post("/api/orders/" + id);
   },
   // Finds all orders for one user

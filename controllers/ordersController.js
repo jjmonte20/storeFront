@@ -21,7 +21,7 @@ module.exports = {
     // for creating an order
     createOrder: function(req, res){
         db.Order
-            .create()
+            .create(req.body)
             .then(dbOrder => {
                 // need URL to be the userId
                 return db.User.findOneAndUpdate({ _id: req.params.id }, { $push: { orders: dbOrder._id } }, { new: true })
