@@ -10,7 +10,8 @@ class Shop extends Component {
         products: [],
         items: [],
         user: '',
-        order: ''
+        order: '',
+        search: ''
     }
 
     componentDidMount() {
@@ -26,6 +27,14 @@ class Shop extends Component {
             }
         })
     }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+
+        this.setState({
+            [name]: value
+        });
+    };
 
     loadOrder = () => {
         API.findOneOrder(this.state.user.orders[0]).then(res => {
@@ -57,6 +66,11 @@ class Shop extends Component {
  
     render() {
         if (this.state.user) {
+            let filteredProducts = this.state.products.filter(
+                (product) => {
+                    return product.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+                }
+            )
             return (
                 <Container fluid>
                     <Row>
@@ -87,9 +101,20 @@ class Shop extends Component {
                     <Row>
                         <Col size="md-12">
                             <h1>Products on Sale</h1>
+                            <form>
+                                <input 
+                                className="form-control"
+                                type="search" 
+                                name="search" 
+                                value={this.state.search} 
+                                placeholder="Search" 
+                                aria-label="Search" 
+                                onChange={this.handleInputChange}
+                                />
+                            </form>
                             {this.state.products.length ? (
                                 <div>
-                                    {this.state.products.map(product => (
+                                    {filteredProducts.map(product => (
                                         <div className="card" key={product._id}>
                                         <strong className="productInfo">{product.name}: {product.price}$</strong>
                                         <button type="button" onClick={() => this.addToCart(product)}>Add to cart</button>
