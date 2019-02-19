@@ -23,7 +23,6 @@ class Shop extends Component {
                 this.setState({ user: res.data });
                 this.loadOrder();
                 this.loadProducts();
-                this.loadItems();
             }
         })
     }
@@ -31,6 +30,7 @@ class Shop extends Component {
     loadOrder = () => {
         API.findOneOrder(this.state.user.orders[0]).then(res => {
             this.setState({ order: res.data });
+            this.loadItems();
         })
     }
 
@@ -41,19 +41,17 @@ class Shop extends Component {
     }
 
     loadItems = () => {
-        API.findOneOrder(this.state.user.orders).then(res =>{
-            console.log(res);
-            this.setState({ items: res.data.items });
-        })
-    }
+            console.log(this.state.order[0].items);
+            this.setState({ items: this.state.order[0].items });
+        }
 
     addToCart = product => {
-        console.log(product.name);
-        API.createItem(this.state.order._id, {
+        console.log(this.state.order[0]._id);
+        API.createItem(this.state.order[0]._id, {
             name: product.name,
             price: product.price
         }).then(res => {
-            this.loadItems();
+            this.loadOrder();
         })
     }
  
@@ -72,11 +70,23 @@ class Shop extends Component {
                         <Col size="md-12">
                             <div>
                                 <h1>Your items</h1>
+                                {this.state.items.length ? (
+                                <div>
+                                    {this.state.items.map(item => (
+                                        <div className="card" key={item._id}>
+                                        <strong className="productInfo">{item.name}</strong>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <h3>Something went wrong</h3>
+                            )}
                             </div>
                         </Col>
                     </Row>
                     <Row>
                         <Col size="md-12">
+                            <h1>Products on Sale</h1>
                             {this.state.products.length ? (
                                 <div>
                                     {this.state.products.map(product => (

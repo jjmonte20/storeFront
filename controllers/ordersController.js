@@ -13,7 +13,7 @@ module.exports = {
     // finding one order so I can populate with items
     findOneOrder: function(req, res){
         db.Order
-            .findOne({ _id: req.params.id })
+            .find({ _id: req.params.id })
             .populate("items")
             .then(dbOrder => res.json(dbOrder))
             .catch(err => res.status(422).json(err));

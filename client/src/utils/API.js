@@ -23,11 +23,12 @@ export default {
     return axios.get("/api/orders/user/" + id, orderData);
   },
   // Finds all data for one order
-  findOneOrder: function(id, orderData){
-    return axios.get("/api/orders/" + id, orderData);
+  findOneOrder: function(id){
+    return axios.get("/api/orders/" + id);
   },
   // Deletes an order
   deleteOrder: function(id){
+    console.log(id);
     return axios.delete("/api/orders/" + id);
   },
   // ============================

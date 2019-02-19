@@ -7,10 +7,12 @@ var Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 var OrderSchema = new Schema({
     // `title` must be of type String
-    items:{
+    items:[
+      {
       type: Schema.Types.ObjectId,
       ref: "Item"
     }
+  ]
   });
   
   // This creates our model from the above schema, using mongoose's model method
